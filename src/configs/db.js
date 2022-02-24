@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-module.exports = ()=>{
-    return mongoose.connect("mongodb://localhost:27017/paytmmall");
-}
+module.exports = () => {
+	return mongoose.connect(
+		"mongodb+srv://paytmmall:paytmmall_123@cluster0.hvbuz.mongodb.net/paytmMall-Clone?retryWrites=true&w=majority"
+	);
+};
