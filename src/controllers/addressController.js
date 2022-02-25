@@ -1,27 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/productModel");
+const Address = require("../models/addressModel");
 
 router.get("", async (req, res) => {
 	try {
-		const products = await Product.find()
-			.populate("brand_id")
-			.populate({
-				path: "subCategory_id",
-				populate: {
-					path: "category_id",
-				},
-			})
-			.lean()
-			.exec();
-		res.status(200).send(products);
+		const items = await Address.find().lean().exec();
+		res.status(200).send(items);
 	} catch (err) {
 		res.status(500).send(err.message);
 	}
 });
 router.get("/brands", async (req, res, next) => {
 	try {
-		var allBrands = await Product.distinct("brand");
+		var allBrands = await Address.distinct("brand");
 		res.status(200).json({ allBrands });
 	} catch (error) {
 		next(error);
@@ -30,7 +21,7 @@ router.get("/brands", async (req, res, next) => {
 
 router.get("/category", async (req, res, next) => {
 	try {
-		var categories = await Product.distinct("category");
+		var categories = await Address.distinct("category");
 		res.status(200).json({ categories });
 	} catch (error) {
 		next(error);
@@ -39,7 +30,7 @@ router.get("/category", async (req, res, next) => {
 
 router.get("/subCategory", async (req, res, next) => {
 	try {
-		var subCategories = await Product.distinct("subCategory");
+		var subCategories = await Address.distinct("subCategory");
 		res.status(200).json({ subCategories });
 	} catch (error) {
 		next(error);
@@ -48,8 +39,8 @@ router.get("/subCategory", async (req, res, next) => {
 
 router.get("/:id", async (req, res) => {
 	try {
-		const products = await Product.findById(req.params.id).lean().exec();
-		res.status(200).send(products);
+		const items = await Address.findById(req.params.id).lean().exec();
+		res.status(200).send(items);
 	} catch (err) {
 		res.status(500).send(err.message);
 	}
@@ -57,8 +48,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("", async (req, res) => {
 	try {
-		const products = await Product.create(req.body);
-		res.status(200).send(products);
+		const items = await Address.create(req.body);
+		res.status(200).send(items);
 	} catch (err) {
 		res.status(500).send(err.message);
 	}
@@ -66,12 +57,12 @@ router.post("", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
 	try {
-		const products = await Product.findByIdAndUpdate(req.params.id, req.body, {
+		const items = await Address.findByIdAndUpdate(req.params.id, req.body, {
 			new: true,
 		})
 			.lean()
 			.exec();
-		res.status(200).send(products);
+		res.status(200).send(items);
 	} catch (err) {
 		res.status(500).send(err.message);
 	}
@@ -79,10 +70,8 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
 	try {
-		const products = await Product.findByIdAndDelete(req.params.id)
-			.lean()
-			.exec();
-		res.status(200).send(products);
+		const items = await Address.findByIdAndDelete(req.params.id).lean().exec();
+		res.status(200).send(items);
 	} catch (err) {
 		res.status(500).send(err.message);
 	}

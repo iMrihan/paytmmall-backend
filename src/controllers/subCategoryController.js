@@ -4,7 +4,11 @@ const subCategory = require("../models/subCategoryModel");
 
 router.get("", async (req, res) => {
 	try {
-		const items = await subCategory.find().lean().exec();
+		const items = await subCategory
+			.find()
+			.populate("category_id")
+			.lean()
+			.exec();
 		res.status(200).send(items);
 	} catch (err) {
 		res.status(500).send(err.message);
