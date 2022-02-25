@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 categorySchema = new mongoose.Schema(
 	{
 		name: { type: String, require: true },
-        
+		image_url: { type: String, require: true },
 	},
 	{
 		versionKey: false,

@@ -8,16 +8,18 @@ productSchema = new mongoose.Schema(
 
 		images_url: [{ type: String, require: true }],
 		likes: { type: Number, require: false, default: 0 },
-		subCategory: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "subCategory",
-				required: true,
-			},
-		],
-		brand_id: [
-			{ type: mongoose.Schema.Types.ObjectId, ref: "brand", required: true },
-		],
+		subCategory_id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "subCategory",
+			required: true,
+		},
+
+		brand_id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "brand",
+			required: true,
+		},
+
 		comment_id: [{ type: mongoose.Schema.Types.ObjectId, ref: "comment" }],
 	},
 	{
