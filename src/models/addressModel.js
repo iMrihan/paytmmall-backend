@@ -6,14 +6,14 @@ addressSchema = new mongoose.Schema(
 		address1: { type: String, require: true },
 		address2: { type: String },
 		mobile: { type: Number, require: true },
-
-		pinCode: { type: String, require: true, minlength: 6, maxlength: 6 },
+		pinCode: { type: Number, require: true },
 		city: { type: String, require: true },
+		state: { type: String, require: true }
 		// address: { type: String, require: false },
 		// myCarts: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
-		user_id: [
-			{ type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
-		],
+		// user_id: [
+		// 	{ type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
+		// ],
 		// myFavorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
 	},
 	{
@@ -22,4 +22,4 @@ addressSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model("address", addressSchema);
+module.exports = mongoose.model("addresses", addressSchema);
